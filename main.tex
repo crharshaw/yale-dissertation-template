@@ -1,0 +1,98 @@
+\documentclass[12pt]{report}
+\usepackage[letterpaper,margin=1.0in,left=1.5in]{geometry}
+
+% for double table of contents: https://tex.stackexchange.com/questions/260445/separate-table-of-contents-for-appendix
+\usepackage{etoc}
+
+% packages used
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage[format=plain,font=small,labelfont=bf,textfont=up]{caption}
+\usepackage{graphicx}
+
+\usepackage{natbib}
+\usepackage{setspace}
+\setstretch{1.05}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs,showmanualtags}
+\usepackage{xcolor}
+
+\usepackage{blindtext} % used only for generating fake text
+
+\usepackage[hidelinks]{hyperref} % this should go last apparently?
+
+\input{content/commands}
+
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%
+% Preamble to Dissertation
+%%%%%%%%%%%%%%%%%
+	
+\pagenumbering{gobble}
+
+\input{content/abstract}
+
+\input{content/title-page}
+
+\input{content/copyright}
+
+\input{content/dedication}
+
+\pagenumbering{roman}
+\setcounter{page}{3}
+
+\input{content/acknowledgment}
+
+% set up main table of contents
+\etocdepthtag.toc{mtchapter}
+\etocsettagdepth{mtchapter}{subsection}
+\etocsettagdepth{mtappendix}{none}
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%
+% Main Body of Dissertation
+%%%%%%%%%%%%%%%%%
+
+\input{content/intro}
+
+\input{content/chapter-1}
+
+\input{content/chapter-2}
+
+%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{apalike}
+
+\begin{singlespace}
+	\bibliography{main.bib}
+\end{singlespace}
+
+%%%%%%%%%%%%%%%%%
+% Appendices
+%%%%%%%%%%%%%%%%%
+
+\newpage
+\appendix
+
+% set up appendix table of contents
+\etocdepthtag.toc{mtappendix}
+\etocsettagdepth{mtchapter}{none}
+\etocsettagdepth{mtappendix}{subsection}
+\tableofcontents
+
+\include{content/appendix}
+
+\end{document}
